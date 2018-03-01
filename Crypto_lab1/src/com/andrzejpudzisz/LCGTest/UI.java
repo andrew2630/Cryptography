@@ -1,6 +1,6 @@
 package com.andrzejpudzisz.LCGTest;
 
-import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
@@ -10,7 +10,6 @@ import java.util.LinkedList;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
@@ -29,6 +28,7 @@ public class UI extends JFrame implements ActionListener {
 	public UI() {
 		lcg = new LCG(25214903917l, 11, (long) Math.pow(2, 48));
 		test = new Test(lcg);
+		k = 1;
 		
 		setMinimumSize(new Dimension(600, 300));
 		setTitle("LCG");
@@ -56,25 +56,83 @@ public class UI extends JFrame implements ActionListener {
 		LinkedList<JTextField> txtList = new LinkedList<JTextField>();
 		LinkedList<JButton> btnList = new LinkedList<JButton>();
 		
+		txtList.add(txtLCG);
+		txtList.add(txtTest);
+		txtList.add(txtResult);
+		txtList.add(txtK);
+		txtList.add(txtSumRes);
+		txtList.add(txtSumK);
+		
 		setLayout(new GridLayout(0, 2));
 				
 		add(labelLCG);
 		add(txtLCG);
 		add(labelTest);
 		add(txtTest);
+		add(labelResult);
+		add(txtResult);
+		add(labelK);
+		add(txtK);
+		add(labelSumRes);
+		add(txtSumRes);
+		add(labelSumK);
+		add(txtSumK);
+		add(btnNext);
+		add(btnKNext);
 		
+		for(JTextField t : txtList) {
+			t.setHorizontalAlignment(JTextField.CENTER);
+			t.setDisabledTextColor(new Color(0, 0, 0));
+			t.setEnabled(false);
+		}
+		txtK.setEnabled(true);
 		
+		btnNext.addActionListener(e -> {
+			btnNextAction(e);
+		});
+		
+		btnKNext.addActionListener(e -> {
+			btnKNextAction(e);
+		});
+		
+		update();
 		validate();
+	}
+	
+	private void btnNextAction(ActionEvent e) {
+		update();
+	}
+	
+	private void btnKNextAction(ActionEvent e) {
+		k = Integer.parseInt(txtK.getText());
+		sumK += k;
+		for(int i = 0; i < k; i++) {
+			update();
+			if(result) {
+				sumRes++;
+			}
+		}
+	}
+	
+	private void update() {
+		long lcgNum = test.getLCGOut();
+		long testNum = test.predictLcg();
+		txtLCG.setText("" + lcgNum);
+		txtTest.setText("" + testNum);
+		calcResult(lcgNum, testNum);
+		txtResult.setText("" + result);
+		txtSumRes.setText("" + sumRes);
+		txtSumK.setText("" + sumK);
+	}
+	
+	private void calcResult(long lcgNum, long testNum) {
+		result = lcgNum == testNum;
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
 		// TODO Auto-generated method stub
 		
-	}
-	
-	private void calcResult() {
-		result = test.getLCGOut() == test.predictLcg();
 	}
 	
 	public static void main(String[] args) {
