@@ -52,29 +52,11 @@ public class UI extends JFrame implements ActionListener {
 		btnNext = new JButton("Next one");
 		btnKNext = new JButton("Next K times");
 		
-		//JPanel pFirst = new JPanel();
-		//JPanel pSecond = new JPanel();
-		//JPanel pThird = new JPanel();
-		
 		LinkedList<JLabel> labelList = new LinkedList<JLabel>();
 		LinkedList<JTextField> txtList = new LinkedList<JTextField>();
 		LinkedList<JButton> btnList = new LinkedList<JButton>();
 		
 		setLayout(new GridLayout(0, 2));
-		//pFirst.setLayout(new GridLayout(2, 0));
-		//pSecond.setLayout(new GridLayout(2, 0));
-		//pThird.setLayout(new GridLayout(2, 0));
-		
-		//add(pFirst, BorderLayout.NORTH);
-		//add(pSecond, BorderLayout.CENTER);
-		//add(pThird, BorderLayout.SOUTH);
-		//pFirst.add(labelLCG);
-		//pFirst.add(labelTest);
-		//pFirst.add(txtLCG);
-		//pFirst.add(txtTest);
-		//pFirst.add(labelResult);
-		//pFirst.add(txtResult);
-		//pSecond.add(labelSumK);
 				
 		add(labelLCG);
 		add(txtLCG);
