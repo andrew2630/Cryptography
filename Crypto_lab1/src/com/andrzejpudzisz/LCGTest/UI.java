@@ -5,6 +5,7 @@ import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.math.BigInteger;
 import java.util.LinkedList;
 
 import javax.swing.JButton;
@@ -18,7 +19,7 @@ public class UI extends JFrame implements ActionListener {
 	private LCG lcg;
 	private Test test;
 	private boolean result;
-	////////////////////////////////////////////////////////////////////////////////////////////////////////
+	
 	private int k, sumRes, sumK;
 
 	private JLabel labelLCG, labelTest, labelResult, labelK, labelSumRes, labelSumK;
@@ -26,7 +27,8 @@ public class UI extends JFrame implements ActionListener {
 	private JButton btnNext, btnKNext;
 	
 	public UI() {
-		lcg = new LCG(25214903917l, 11, (long) Math.pow(2, 48));
+		lcg = new LCG(BigInteger.valueOf(25214903917l), BigInteger.valueOf(11l), BigInteger.valueOf(281474976710656l));
+		//lcg = new LCG(BigInteger.valueOf(15l), BigInteger.valueOf(11l), BigInteger.valueOf(1024l));
 		test = new Test(lcg);
 		k = 1;
 		
@@ -107,16 +109,16 @@ public class UI extends JFrame implements ActionListener {
 		k = Integer.parseInt(txtK.getText());
 		sumK += k;
 		for(int i = 0; i < k; i++) {
-			update();
 			if(result) {
 				sumRes++;
 			}
+			update();
 		}
 	}
 	
 	private void update() {
-		long lcgNum = test.getLCGOut();
-		long testNum = test.predictLcg();
+		BigInteger lcgNum = test.getLCGOut();
+		BigInteger testNum = test.predictLcg();
 		txtLCG.setText("" + lcgNum);
 		txtTest.setText("" + testNum);
 		calcResult(lcgNum, testNum);
@@ -125,8 +127,8 @@ public class UI extends JFrame implements ActionListener {
 		txtSumK.setText("" + sumK);
 	}
 	
-	private void calcResult(long lcgNum, long testNum) {
-		result = lcgNum == testNum;
+	private void calcResult(BigInteger lcgNum, BigInteger testNum) {
+		result = lcgNum.equals(testNum);
 	}
 
 	@Override

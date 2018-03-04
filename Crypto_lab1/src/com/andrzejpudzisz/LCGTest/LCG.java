@@ -1,12 +1,14 @@
 package com.andrzejpudzisz.LCGTest;
 
+import java.math.BigInteger;
+
 class LCG {
 	
 	//i.e.: a = 25214903917; c = 11; m = Math.pow(2, 48);
-	private long x, a, c, m;
+	private BigInteger x, a, c, m;
 
-	LCG(long a, long c, long m) {
-		x = 0;
+	LCG(BigInteger a, BigInteger c, BigInteger m) {
+		x = BigInteger.valueOf(1);
 		this.a = a;
 		this.c = c;
 		this.m = m;
@@ -16,8 +18,8 @@ class LCG {
 		}
 	}
 	
-	long getRand() {
-		x = (a * x + c) % m;
+	BigInteger getRand() {
+		x = (a.multiply(x).add(c)).mod(m);
 		return x;
 	}
 	
