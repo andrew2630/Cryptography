@@ -18,7 +18,7 @@ public class UI extends JFrame implements ActionListener {
 	private LCG lcg;
 	private Test test;
 	private boolean result;
-	
+	////////////////////////////////////////////////////////////////////////////////////////////////////////
 	private int k, sumRes, sumK;
 
 	private JLabel labelLCG, labelTest, labelResult, labelK, labelSumRes, labelSumK;
