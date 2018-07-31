@@ -25,7 +25,7 @@ public class UI extends JFrame implements ActionListener {
 	private JButton btnNext;
 	
 	public UI() {
-		rand = new GlibcRand(BigInteger.valueOf(1l));
+		rand = new GlibcRand(BigInteger.valueOf(1l), 10000);
 		test = new Test(rand);
 		
 		setMinimumSize(new Dimension(600, 300));
